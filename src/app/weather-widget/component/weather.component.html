@@ -1,0 +1,52 @@
+<div class="card" [ngStyle]="setStyles()">
+    <div class="card-header" [class.invisible]="!dataReceived">
+        <div class="row">
+            <div class="col-8">
+                <!-- Course implementation
+                    h2><i class="fa fa-map-marker" aria-hidden="true"></i>
+                    {{ currentCity }} {{ currentState }}</h2-->
+                    <div id="location-wrapper">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        {{ currentCity }}, {{ currentState }}
+                        <p id="dateTime">{{ currentDate }}</p>
+                    </div>
+            </div>
+            <div class="col-4 text-right">
+                <h1 class="pointer" (click)="toggleTempUnits()">
+                    {{ weatherData.temp
+                    | tempUnit: currentTempUnit
+                    | number: '.0-0'}}
+                    &deg;{{ tempUnitSymbol }}
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div id="indicator" [hidden]="dataReceived">
+            <i class="fa fa-circle-o-notch fa-spin fa-4x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="container" [hidden]="!dataReceived">
+            <canvas id="icon"></canvas>
+            <h2>{{ weatherData.summary }}</h2><!--This also looks good as an h1-->
+            <div class="overlay" [ngStyle]="setStyles()">
+                <div class="text" (click)="refresh()">Refresh</div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer" [class.invisible]="!dataReceived">
+        <div class="row">
+            <div class="col-5 pointer" (click)="toggleSpeedUnits()">
+                <h3>Wind</h3>
+                <h3>{{ weatherData.wind | speedUnit: currentSpeedUnit }}</h3>
+            </div>
+            <div class="col-5 offset-2">
+                <h3>Humidity</h3>
+                <h3>{{ weatherData.humidity | percent }}</h3>
+            </div>
+        </div>
+        <div class="row" id="helper-row">
+            <small><!-- class="text-muted"-->Click to switch: &deg;F/&deg;C &amp; mph/kph </small>
+        </div>
+    </div>
+</div>

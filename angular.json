@@ -23,9 +23,10 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/font-awesome/css/font-awesome.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": ["./src/app/weather-widget/js/skycons.js"]
           },
           "configurations": {
             "production": {
